@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Swipe Up</string>
+    <string name="service_name">Swipe Up Service</string>
+    <string name="receiver_name">Boot receiver</string>
+</resources>
