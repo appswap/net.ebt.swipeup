@@ -10,7 +10,7 @@ import android.util.Log;
  */
 public class BootReceiver extends BroadcastReceiver {
 
-    private static final String TAG = "SwipeUpService";
+    private static final String TAG = "BootReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
