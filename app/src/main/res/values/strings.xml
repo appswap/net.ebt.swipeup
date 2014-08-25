@@ -1,5 +1,12 @@
 <resources>
-    <string name="app_name">Swipe Up</string>
-    <string name="service_name">Swipe Up Service</string>
+    <string name="app_name">Swipe Now</string>
+    <string name="service_name">Swipe Now Service</string>
     <string name="receiver_name">Boot receiver</string>
+    <string name="pref_enable">Activate assist gesture</string>
+    <string name="pref_enable_summary">Swipe the bottom edge to launch any assist activity</string>
+    <string name="pref_overlay">Overlay</string>
+    <string name="pref_overlay_summary">Draw the swipe zone</string>
+    <string name="pref_appswap">Install App Swap</string>
+    <string name="pref_appswap_summary">Tap here to install App Swap - The Smart Drawer</string>
+    <string name="title_activity_settings">Swipe Now</string>
 </resources>

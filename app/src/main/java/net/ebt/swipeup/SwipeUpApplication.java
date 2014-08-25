@@ -13,6 +13,5 @@ public class SwipeUpApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.i(TAG, "create SwipeUpApplication");
     }
 }

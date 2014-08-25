@@ -1,0 +1,20 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:key="enable"
+        android:title="@string/pref_enable"
+        android:summary="@string/pref_enable_summary"
+        android:defaultValue="true" />
+
+    <CheckBoxPreference
+        android:key="overlay"
+        android:title="@string/pref_overlay"
+        android:summary="@string/pref_overlay_summary"
+        android:defaultValue="false" />
+
+    <Preference
+        android:key="appswap"
+        android:title="@string/pref_appswap"
+        android:summary="@string/pref_appswap_summary"/>
+
+</PreferenceScreen>

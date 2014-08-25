@@ -2,13 +2,21 @@ package net.ebt.swipeup;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
+import net.ebt.swipeup.ui.EdgeOverlay;
+import net.ebt.swipeup.ui.EdgeView;
+
+import java.util.List;
 
 /**
  * Created by eboudrant on 8/13/14.
@@ -17,7 +25,8 @@ public class SwipeUpService  extends Service {
 
     private static final String TAG = "SwipeUpService";
     private WindowManager windowManager;
-    private ImageView chatHead;
+    private EdgeOverlay overlay;
+    private EdgeView edgeView;
 
     @Override public IBinder onBind(Intent intent) {
         // Not used
@@ -27,31 +36,47 @@ public class SwipeUpService  extends Service {
     @Override public void onCreate() {
         super.onCreate();
 
-        windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
 
-        chatHead = new ImageView(this);
-        chatHead.setBackgroundColor(Color.RED);
+        if(ViewConfiguration.get(this).hasPermanentMenuKey() || BuildConfig.DEBUG) {
 
-        WindowManager.LayoutParams params = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_PHONE,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                PixelFormat.TRANSLUCENT);
+            windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
 
-        params.gravity = Gravity.TOP | Gravity.LEFT;
-        params.x = 0;
-        params.y = 100;
+            int gravity = Gravity.BOTTOM;
 
-        windowManager.addView(chatHead, params);
+            WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.TYPE_PHONE,
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                    PixelFormat.TRANSLUCENT);
 
-        Log.i(TAG, "SwipeUpService started");
+            overlay = new EdgeOverlay(this, gravity, params);
+
+            windowManager.addView(overlay, params);
+
+            params = new WindowManager.LayoutParams(
+                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.TYPE_PHONE,
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                    PixelFormat.TRANSLUCENT);
+
+            edgeView = new EdgeView(this, gravity, params);
+
+            windowManager.addView(edgeView, params);
+            edgeView.setOverlay(overlay);
+
+            Log.i(TAG, "SwipeUpService started");
+        } else {
+            Log.i(TAG, "SwipeUpService started but not active, your device have already Google New gesture");
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (chatHead != null) windowManager.removeView(chatHead);
+        if (overlay != null) windowManager.removeView(overlay);
+        if (edgeView != null) windowManager.removeView(edgeView);
         Log.i(TAG, "SwipeUpService destroyed");
     }
 

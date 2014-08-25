@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="zone_height">10dp</dimen>
+    <dimen name="circle_stroke">2dp</dimen>
+    <dimen name="overlay_height">150dp</dimen>
+    <dimen name="focus_radius">50dp</dimen>
+    <dimen name="glowpadview_target_placement_radius">135dip</dimen>
+    <dimen name="glowpadview_glow_radius">75dip</dimen>
+    <dimen name="glowpadview_inner_radius">15dip</dimen>
+
+</resources>
